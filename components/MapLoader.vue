@@ -39,7 +39,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.apiKey)
     GoogleMapsApiLoader({ apiKey: this.apiKey }).then(google => {
       this.google = google
       this.initializeMap()

@@ -2,31 +2,43 @@
   <map-loader 
     :map-config="mapConfig"
     api-key="AIzaSyBLM1CTnoUOebTSSfF9yy6p6OSLRjqh7Ao"
-  />
+  >
+    <map-marker
+      v-for="(marker, i) in markers"
+      :key="i"
+      :position="marker"
+    />
+  </map-loader>
 </template>
 
 <script>
 import MapLoader from './MapLoader.vue'
+import MapMarker from './MapMarker.vue'
 
 export default {
   components: {
-    MapLoader
+    MapLoader,
+    MapMarker
   },
   props: {
     markers: {
       type: Array,
       required: false,
       default() {
-        return [{ lat: 35.6432027, lng: 139.6729435 }]
+        return []
       }
+    },
+    center: {
+      type: Object,
+      required: true,
+      default: null
     }
   },
   data() {
-    console.log('this')
     return {
       mapConfig: {
-        zoom: 12,
-        center: this.markers[0]
+        zoom: 15,
+        center: this.center
       }
     }
   }

@@ -1,18 +1,35 @@
 <template>
   <section>
     <div>
-      <design-scramble-map />
+      <design-scramble-map
+        :center="center"
+        :markers="markers"
+      />
     </div>
   </section>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
 import { default as DesignScrambleMap } from '~/components/Map.vue'
 
 export default {
   components: {
     DesignScrambleMap
+  },
+  data() {
+    return {
+      center: {
+        lat: 35.658034,
+        lng: 139.701636
+      },
+      markers: [
+        {
+          lat: 35.6590249,
+          lng: 139.70347300000003,
+          title: '渋谷ヒカリエ「8/ COURT」'
+        }
+      ]
+    }
   }
 }
 </script>
