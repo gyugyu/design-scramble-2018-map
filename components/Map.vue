@@ -50,8 +50,9 @@ export default {
   data() {
     return {
       mapConfig: {
-        zoom: 15,
-        center: this.center
+        center: this.center,
+        gestureHandling: 'greedy',
+        zoom: 15
       }
     }
   }
