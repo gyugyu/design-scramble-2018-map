@@ -6,6 +6,11 @@
 export default {
   inject: ['google', 'map'],
   props: {
+    open: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
     position: {
       type: Object,
       required: true,
@@ -22,8 +27,8 @@ export default {
     infoContent() {
       // prettier-ignore
       return `
-        <h2>${this.position.title}</h2>
-        <p><a href="comgooglemaps://?daddr=${this.position.lat},${this.position.lng}">Navigate with Google Maps App</a></p>
+        <h2 class="title is-4">${this.position.title}</h2>
+        <p><a href="https://www.google.com/maps/dir/?api=1&destination=${this.position.lat},${this.position.lng}">Launch Google Maps</a></p>
       `
     }
   },
@@ -40,6 +45,13 @@ export default {
     this.marker.addListener('click', () => {
       this.infoWindow.open(this.map, this.marker)
     })
+
+    if (this.open) {
+      this.infoWindow.open(this.map, this.marker)
+    }
+  },
+  beforeDestroy() {
+    this.marker.setMap(null)
   }
 }
 </script>

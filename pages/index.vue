@@ -1,20 +1,25 @@
 <template>
   <section>
-    <div>
-      <design-scramble-map
-        :center="center"
-        :markers="markers"
-      />
-    </div>
+    <search
+      :on-deselect-hit="onDeselectHit"
+      :on-select-hit="onSelectHit"
+    />
+    <design-scramble-map
+      :center="center"
+      :markers="markers"
+      :selected-marker="selectedLocation"
+    />
   </section>
 </template>
 
 <script>
 import { default as DesignScrambleMap } from '~/components/Map.vue'
+import Search from '~/components/Search.vue'
 
 export default {
   components: {
-    DesignScrambleMap
+    DesignScrambleMap,
+    Search
   },
   data() {
     return {
@@ -88,7 +93,16 @@ export default {
           lng: 139.69550490000006,
           title: 'ロフトワーク オフィス'
         }
-      ]
+      ],
+      selectedLocation: null
+    }
+  },
+  methods: {
+    onDeselectHit() {
+      this.selectedLocation = null
+    },
+    onSelectHit(hit) {
+      this.selectedLocation = hit.locationId - 1
     }
   }
 }

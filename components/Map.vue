@@ -3,10 +3,18 @@
     :map-config="mapConfig"
     api-key="AIzaSyBLM1CTnoUOebTSSfF9yy6p6OSLRjqh7Ao"
   >
+    <div v-if="selectedMarker == null">
+      <map-marker
+        v-for="(marker, i) in markers"
+        :key="i"
+        :open="false"
+        :position="marker"
+      />
+    </div>
     <map-marker
-      v-for="(marker, i) in markers"
-      :key="i"
-      :position="marker"
+      v-if="selectedMarker != null"
+      :open="true"
+      :position="markers[selectedMarker]"
     />
   </map-loader>
 </template>
@@ -31,6 +39,11 @@ export default {
     center: {
       type: Object,
       required: true,
+      default: null
+    },
+    selectedMarker: {
+      type: Number,
+      required: false,
       default: null
     }
   },
